@@ -7,9 +7,10 @@
     <style>
         * { box-sizing: border-box; }
 
+        html, body { min-height: 100%; }
+
         body {
             margin: 0;
-            min-height: 100vh;
             background: #000;
             color: #fff;
             font-family: "Courier New", monospace;
@@ -17,96 +18,94 @@
 
         .page {
             min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            min-height: 100svh;
+            display: grid;
+            place-items: center;
             position: relative;
             overflow: hidden;
-            text-align: center;
-            padding: 30px;
+            padding: 32px 20px;
+            isolation: isolate;
         }
 
-        .shield {
+        .page::before {
+            content: "";
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            margin: 0;
-            color: #00e85c;
-            opacity: 0.42;
-            font-size: clamp(13px, 1.6vw, 23px);
-            line-height: 1;
-            white-space: pre;
-            text-shadow: 0 0 8px rgba(0, 232, 92, 0.65);
-            user-select: none;
+            z-index: -2;
+            width: min(78vw, 780px);
+            aspect-ratio: 1;
+            background: url("assets/shield-background.svg") center / contain no-repeat;
+            opacity: .72;
+            filter: drop-shadow(0 0 16px rgba(0, 255, 102, .18));
+        }
+
+        .page::after {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            width: min(68vw, 680px);
+            height: min(58vw, 580px);
+            background: radial-gradient(ellipse, rgba(0,0,0,.82) 0%, rgba(0,0,0,.65) 45%, rgba(0,0,0,0) 76%);
             pointer-events: none;
         }
 
         main {
-            position: relative;
-            z-index: 1;
-            padding: 45px;
-            background: radial-gradient(circle, rgba(0,0,0,.92) 0%, rgba(0,0,0,.72) 55%, rgba(0,0,0,0) 78%);
+            width: min(92vw, 900px);
+            text-align: center;
         }
 
         h1 {
-            margin: 0 0 12px;
-            font-size: clamp(2.4rem, 6vw, 5rem);
+            margin: 0 0 14px;
+            font-size: clamp(2.35rem, 6vw, 5rem);
+            line-height: 1.05;
+            letter-spacing: .01em;
         }
 
         h2 {
-            margin: 0 0 20px;
-            font-size: clamp(1rem, 2.2vw, 1.5rem);
-            font-weight: normal;
-            color: #d0d0d0;
+            margin: 0 0 22px;
+            color: #d6d6d6;
+            font-size: clamp(1rem, 2.1vw, 1.5rem);
+            font-weight: 400;
         }
 
         p {
-            margin: 0 0 28px;
-            color: #b5b5b5;
+            margin: 0 0 30px;
+            color: #bdbdbd;
+            font-size: clamp(.9rem, 1.4vw, 1.05rem);
         }
 
         a {
-            color: #00f06a;
-            text-decoration: none;
+            display: inline-block;
+            padding: 12px 20px;
             border: 2px solid #00e85c;
             border-radius: 8px;
-            padding: 12px 20px;
-            display: inline-block;
-            box-shadow: 0 0 10px rgba(0, 232, 92, 0.3);
+            color: #00f06a;
+            background: rgba(0,0,0,.72);
+            box-shadow: 0 0 12px rgba(0,232,92,.28);
+            text-decoration: none;
+            transition: .18s ease;
         }
 
-        a:hover {
-            background: #00e85c;
+        a:hover, a:focus-visible {
             color: #000;
-            box-shadow: 0 0 18px rgba(0, 232, 92, 0.7);
+            background: #00e85c;
+            box-shadow: 0 0 22px rgba(0,232,92,.65);
+            outline: none;
+        }
+
+        @media (max-width: 600px) {
+            .page::before {
+                width: min(125vw, 650px);
+                opacity: .58;
+            }
+            .page::after {
+                width: 110vw;
+                height: 75vh;
+            }
         }
     </style>
 </head>
 <body>
     <div class="page">
-        <pre class="shield" aria-hidden="true">
-                       +
-                    /| |\
-                 /// | | \\\
-              ////   | |   \\\\
-           +////     | |     \\\\+
-          |||        | |        |||
-          |||        | |        |||
-          |||        | |        |||
-          |||        | |        |||
-           \\\       |       ///
-            \\\      |      ///
-             \\\     |     ///
-              \\\    |    ///
-               \\\   |   ///
-                \\\  |  ///
-                 \\\ | ///
-                  \\\|///
-                    \/
-                     +
-        </pre>
-
         <main>
             <h1>Krzysztof Hanas</h1>
             <h2>Cybersecurity | SOC Analyst</h2>
