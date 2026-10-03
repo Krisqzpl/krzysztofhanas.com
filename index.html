@@ -5,30 +5,107 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Krzysztof Hanas | Cybersecurity</title>
     <style>
+        * { box-sizing: border-box; }
+
         body {
             margin: 0;
             min-height: 100vh;
             background: #000;
             color: #fff;
-            font-family: Arial, sans-serif;
+            font-family: "Courier New", monospace;
+            overflow: hidden;
+        }
+
+        .page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .shield {
+            position: absolute;
+            inset: 50% auto auto 50%;
+            transform: translate(-50%, -50%);
+            margin: 0;
+            color: rgba(255, 255, 255, 0.07);
+            font-size: clamp(12px, 1.55vw, 22px);
+            line-height: 1;
+            white-space: pre;
+            user-select: none;
+            pointer-events: none;
         }
 
         main {
-            padding: 60px;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            margin: 0 0 12px;
+            font-size: clamp(2.4rem, 6vw, 5rem);
+        }
+
+        h2 {
+            margin: 0 0 18px;
+            font-size: clamp(1rem, 2.2vw, 1.5rem);
+            font-weight: normal;
+        }
+
+        p {
+            margin: 0 0 28px;
+            color: #aaa;
         }
 
         a {
             color: #fff;
+            text-decoration: none;
+            border: 1px solid #666;
+            padding: 11px 18px;
+            display: inline-block;
+        }
+
+        a:hover {
+            background: #fff;
+            color: #000;
         }
     </style>
 </head>
 <body>
-    <main>
-        <h1>Krzysztof Hanas</h1>
-        <h2>Cybersecurity | SOC Analyst</h2>
-        <p>Personal cybersecurity SOC lab.</p>
+    <div class="page">
+        <pre class="shield" aria-hidden="true">
+                  /\
+               /\/  \/\
+             /          \
+            /            \
+           /              \
+          /                \
+         /                  \
+        |                    |
+        |                    |
+        |                    |
+        |                    |
+         \                  /
+          \                /
+           \              /
+            \            /
+             \          /
+              \        /
+               \      /
+                \    /
+                 \  /
+                  \/
+        </pre>
 
-        <a href="https://github.com/Krisqzpl/krzysztofhanas.com" target="_blank" rel="noopener noreferrer">SOC Lab on GitHub</a>
-    </main>
+        <main>
+            <h1>Krzysztof Hanas</h1>
+            <h2>Cybersecurity | SOC Analyst</h2>
+            <p>Personal cybersecurity SOC lab.</p>
+            <a href="https://github.com/Krisqzpl/krzysztofhanas.com" target="_blank" rel="noopener noreferrer">SOC Lab on GitHub</a>
+        </main>
+    </div>
 </body>
 </html>
