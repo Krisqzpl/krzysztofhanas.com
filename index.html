@@ -30,7 +30,7 @@
         .page::before {
             content: "";
             position: absolute;
-            z-index: -2;
+            z-index: 0;
             width: min(78vw, 780px);
             aspect-ratio: 1;
             background: url("assets/shield-background.webp") center / contain no-repeat;
@@ -41,7 +41,7 @@
         .page::after {
             content: "";
             position: absolute;
-            z-index: -1;
+            z-index: 1;
             width: min(68vw, 680px);
             height: min(58vw, 580px);
             background: radial-gradient(ellipse, rgba(0,0,0,.82) 0%, rgba(0,0,0,.65) 45%, rgba(0,0,0,0) 76%);
@@ -49,6 +49,8 @@
         }
 
         main {
+            position: relative;
+            z-index: 2;
             width: min(92vw, 900px);
             text-align: center;
         }
