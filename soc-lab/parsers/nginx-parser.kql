@@ -1,0 +1,43 @@
+// ============================================================================
+// NGINX ACCESS LOG PARSER
+// ============================================================================
+// Project: Microsoft Sentinel SOC Home Lab
+// Data source: NginxAccess_CL
+//
+// Expected nginx log format:
+//
+// $remote_addr - $remote_user [$time_local]
+// "$request" $status $body_bytes_sent
+// "$http_referer" "$http_user_agent"
+// host="$host"
+//
+// Example output fields:
+// SourceIP, Host, Method, Path, Code, Bytes, Referer, UserAgent
+// ============================================================================
+
+NginxAccess_CL
+
+
+| extend SourceIP = tostring(split(RawData, " ")[0])
+| extend Request = tostring(split(RawData, '"')[1])
+| extend CodeByte = trim(" ", tostring(split(RawData, '"')[2]))
+| extend Code = toint(split(CodeByte, " ")[0])
+| extend Bytes = tolong(split(CodeByte, " ")[1])
+| extend Method = tostring(split(Request, " ")[0])
+| extend Path = tostring(split(Request, " ")[1])
+| extend Referer = tostring(split(RawData, '"')[3])
+| extend UserAgent = tostring(split(RawData, '"')[5])
+| extend Host = extract('host="([^"]+)"', 1, RawData)
+
+| project
+    TimeGenerated,
+    SourceIP,
+    Host,
+    Method,
+    Path,
+    Code,
+    Bytes,
+    Referer,
+    UserAgent,
+    RawData
+| order by TimeGenerated desc
