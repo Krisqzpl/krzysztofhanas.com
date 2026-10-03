@@ -1,0 +1,60 @@
+// Detection: High Request Rate - Nginx
+//
+// Purpose:
+// Detect source IP addresses generating a high volume of HTTP requests
+// to monitored web services within a short time window.
+//
+// Detection logic:
+// Traffic is aggregated by SourceIP across all monitored hosts.
+// This prevents a source from falling below the threshold simply by
+// distributing requests between multiple websites.
+//
+// Threshold:
+// More than 50 HTTP requests within 1 minute from a single SourceIP.
+//
+// Baseline:
+// The threshold was selected after reviewing real Internet traffic
+// observed by the lab. During analysis, one source generated 76 requests
+// within one minute across multiple monitored hosts.
+//
+// Schedule:
+// Run every: 5 minutes
+// Lookup data from: last 5 minutes
+//
+// Entity mapping:
+// IP -> Address -> SourceIP
+//
+// Custom details:
+// Requests
+// Hosts
+// UniquePaths
+// Paths
+// UserAgents
+//
+// Alert name:
+// High Request Rate - {{SourceIP}}
+//
+// Alert description:
+// Source {{SourceIP}} generated {{Requests}} HTTP requests within one minute
+// across {{UniquePaths}} unique paths.
+//
+// Incident grouping:
+// Group alerts when all mapped entities match.
+// Grouping window: 5 hours.
+// Re-open closed incidents: Disabled.
+
+NginxAccess_CL
+| extend SourceIP = tostring(split(RawData, " ")[0])
+| extend Host = extract('host="([^"]+)"', 1, RawData)
+| extend Request = tostring(split(RawData, '"')[1])
+| extend UserAgent = tostring(split(RawData, '"')[5])
+| extend Path = tostring(split(Request, " ")[1])
+| where isnotempty(Host)
+| summarize
+    Requests = count(),
+    Hosts = make_set(Host, 10),
+    UniquePaths = dcount(Path),
+    Paths = make_set(Path, 20),
+    UserAgents = make_set(UserAgent, 10)
+    by SourceIP, bin(TimeGenerated, 1m)
+| where Requests > 50
