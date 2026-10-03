@@ -1,2 +1,2 @@
 # krzysztofhanas.com
-Personal cybersecuruty portfolio Lab
+Personal cybersecuruty Lab
