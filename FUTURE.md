@@ -4,10 +4,10 @@ A lightweight backlog for planned improvements and ideas. Items move into the au
 
 | # | Idea / Planned Change | Area | Status | Notes |
 |---:|---|---|---|---|
-| 1 | Introduce structured Use Case IDs for Sentinel Analytics Rules | Detection Engineering | Planned | UC001–UC099 Network/Web, UC101–UC199 Identity, UC201–UC299 Endpoint/Host, UC301–UC399 Email, UC401–UC499 Cloud/Azure, UC501–UC599 Cross-source/Correlation |
-| 2 | Rename existing web detection rules to the UC naming standard | Detection Engineering | Planned | Start with the current Network/Web rules |
-| 3 | Create a known web scanners watchlist | Detection Tuning | Planned | Suppress recurring scanner noise only in scan/noise-oriented detections |
-| 4 | Apply known-scanner exclusions selectively | Detection Tuning | Planned | Do not suppress security-relevant successful access or higher-risk behavior |
+| 1 | Introduce structured Use Case IDs for Sentinel Analytics Rules | Detection Engineering | Future | UC001–UC099 Network/Web, UC101–UC199 Identity, UC201–UC299 Endpoint/Host, UC301–UC399 Email, UC401–UC499 Cloud/Azure, UC501–UC599 Cross-source/Correlation |
+| 2 | Rename existing web detection rules to the UC naming standard | Detection Engineering | Future | Start with the current Network/Web rules |
+| 3 | Create a known web scanners watchlist | Detection Tuning | Future | Suppress recurring scanner noise only in scan/noise-oriented detections |
+| 4 | Apply known-scanner exclusions selectively | Detection Tuning | Future | Do not suppress security-relevant successful access or higher-risk behavior |
 | 5 | Add Identity telemetry | Identity | Future | Use sign-in telemetry as the basis for UC101–UC199 detections |
 | 6 | Add Endpoint / Host telemetry | Endpoint | Future | Basis for UC201–UC299 detections |
 | 7 | Add Email telemetry and detections | Email | Future | Basis for UC301–UC399 detections |
@@ -15,11 +15,9 @@ A lightweight backlog for planned improvements and ideas. Items move into the au
 | 9 | Build cross-source correlation use cases | Correlation | Future | Correlate signals across Network, Identity, Endpoint, Email, or Cloud |
 | 10 | Add Sentinel Workbook / dashboard | Visualization | Future | Summarize lab telemetry and detection activity |
 | 11 | Expand threat-hunting scenarios | Threat Hunting | Future | Add reusable hunting queries and investigation examples |
-| 12 | Maintain a dedicated troubleshooting document | Documentation | Planned | Record only real issues, root causes, and resolutions encountered during the build |
+| 12 | Maintain a dedicated troubleshooting document | Documentation | Future | Record only real issues, root causes, and resolutions encountered during the build |
 
 ## Status
 
-- **Planned** — agreed next step or near-term improvement.
 - **Future** — accepted idea for a later stage.
-- **In Progress** — currently being implemented.
 - **Done** — implemented; the change should also be recorded in the audit log.
