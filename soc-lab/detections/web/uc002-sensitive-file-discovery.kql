@@ -1,0 +1,94 @@
+// ============================================================================
+// DETECTION: UC002 - Sensitive File Discovery - Nginx
+// ============================================================================
+// Project: Microsoft Sentinel SOC Home Lab
+// Use Case ID: UC002
+// Data source: NginxAccess_CL
+// Severity: Medium
+// Status: Active
+//
+// Purpose:
+// Detects attempts to enumerate sensitive files and configuration resources
+// exposed through a web server.
+//
+// Examples:
+// .env
+// .git
+// .aws
+// wp-config
+// docker-compose
+// sftp-config
+// .svn
+//
+// Detection logic:
+// - Request path contains a known sensitive resource pattern
+// - Activity is aggregated per SourceIP and Host
+// - Aggregation window: 5 minutes
+// - At least 3 unique sensitive paths must be requested
+//
+// Sentinel schedule:
+// - Run query every: 5 minutes
+// - Lookup data from: last 5 minutes
+// - Trigger alert when: query returns > 0 results
+//
+// Entity mapping:
+// - IP.Address -> SourceIP
+//
+// Custom details:
+// - Host
+// - Requests
+// - UniquePaths
+// - Paths
+// - StatusCodes
+// - UserAgents
+//
+// Alert name:
+// UC002 - Sensitive File Discovery - {{Host}} - {{SourceIP}}
+//
+// Alert description:
+// Potential sensitive file discovery detected from {{SourceIP}} targeting
+// {{Host}}. The source attempted to access {{UniquePaths}} unique sensitive
+// paths.
+//
+// Incident grouping:
+// - Enabled
+// - Group alerts when all mapped entities match
+// - Grouping period: 5 hours
+//
+// Notes:
+// HTTP response status is intentionally not used as a detection condition.
+// 404 responses still represent discovery attempts, while 301 responses may
+// represent HTTP-to-HTTPS redirects.
+//
+// A successful response to a sensitive resource should be investigated
+// separately as a potentially higher-severity exposure event.
+// ============================================================================
+
+NginxAccess_CL
+| extend SourceIP = tostring(split(RawData, " ")[0])
+| extend Request = tostring(split(RawData, '"')[1])
+| extend CodeByte = trim(" ", tostring(split(RawData, '"')[2]))
+| extend Code = toint(split(CodeByte, " ")[0])
+| extend Bytes = tolong(split(CodeByte, " ")[1])
+| extend Method = tostring(split(Request, " ")[0])
+| extend Path = tostring(split(Request, " ")[1])
+| extend Referer = tostring(split(RawData, '"')[3])
+| extend UserAgent = tostring(split(RawData, '"')[5])
+| extend Host = extract('host="([^"]+)"', 1, RawData)
+| where Path has_any (
+    ".env",
+    ".git",
+    ".aws",
+    "wp-config",
+    "docker-compose",
+    "sftp-config",
+    ".svn"
+)
+| summarize
+    Requests = count(),
+    UniquePaths = dcount(Path),
+    Paths = make_set(Path, 30),
+    StatusCodes = make_set(Code, 10),
+    UserAgents = make_set(UserAgent, 10)
+    by SourceIP, Host, bin(TimeGenerated, 5m)
+| where UniquePaths >= 3
