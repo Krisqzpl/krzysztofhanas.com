@@ -1,3 +1,9 @@
+<p align="center">
+  <a href="https://krzysztofhanas.com">
+    <img src="../../assets/banner.png" alt="Krzysztof Hanas | Cybersecurity | SOC Analyst" width="60%">
+  </a>
+</p>
+
 # CASE-001: Automated Web Scanner and Sensitive File Discovery
 
 ## Case Summary
@@ -138,3 +144,9 @@ It also demonstrates how investigation of real Internet telemetry can be used to
     Sensitive File Discovery Analytics Rule
 
 The case therefore resulted not only in investigation of an individual scanner, but also in an improvement to the detection capabilities of the SOC lab.
+
+---
+
+<p align="center">
+  © 2026 Krzysztof Hanas · <a href="https://krzysztofhanas.com">krzysztofhanas.com</a>
+</p>
