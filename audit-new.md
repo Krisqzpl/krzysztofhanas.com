@@ -36,6 +36,7 @@ A concise chronological record of changes made to the lab. Each row represents o
 | 24 | Connected portfolio website with SOC lab repository | Portfolio | Direct navigation to technical project content |
 | 25 | Introduced structured Sentinel Use Case IDs | Detection Engineering | UC001–UC099 Network/Web, UC101–UC199 Identity, UC201–UC299 Endpoint/Host, UC301–UC399 Email, UC401–UC499 Cloud/Azure, UC501–UC599 Cross-source/Correlation |
 | 26 | Renamed existing web detections to UC001–UC004 | Detection Engineering | Standardized rule and file naming for current Network/Web use cases |
+| 27 | Aligned web detection severities with Sentinel | Detection Tuning | UC001 and UC002 set to Low; UC003 remains Medium; UC004 set to Low |
 
 > New changes are appended as additional rows. Existing rows remain unchanged unless an implemented component is explicitly modified, replaced, or retired.
 
