@@ -1,3 +1,9 @@
+<p align="center">
+  <a href="https://krzysztofhanas.com">
+    <img src="assets/banner.png" alt="Krzysztof Hanas | Cybersecurity | SOC Analyst" width="60%">
+  </a>
+</p>
+
 # SOC Lab — Future Work
 
 A lightweight backlog for planned improvements and ideas. Items move into the audit log once implemented.
@@ -21,3 +27,9 @@ A lightweight backlog for planned improvements and ideas. Items move into the au
 
 - **Future** — accepted idea for a later stage.
 - **Done** — implemented; the change should also be recorded in the audit log.
+
+---
+
+<p align="center">
+  © 2026 Krzysztof Hanas · <a href="https://krzysztofhanas.com">krzysztofhanas.com</a>
+</p>
