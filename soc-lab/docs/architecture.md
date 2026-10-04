@@ -1,3 +1,9 @@
+<p align="center">
+  <a href="https://krzysztofhanas.com">
+    <img src="../../assets/banner.png" alt="Krzysztof Hanas | Cybersecurity | SOC Analyst" width="60%">
+  </a>
+</p>
+
 # SOC Lab Architecture
 
 ## Overview
@@ -67,3 +73,9 @@ The nginx log includes the source IP, HTTP request, response code, User-Agent, r
 ## Purpose
 
 The environment is intentionally small and public-facing so it can provide real Internet telemetry for SOC analysis without deploying intentionally vulnerable applications.
+
+---
+
+<p align="center">
+  © 2026 Krzysztof Hanas · <a href="https://krzysztofhanas.com">krzysztofhanas.com</a>
+</p>
