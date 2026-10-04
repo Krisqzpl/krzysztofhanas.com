@@ -63,10 +63,10 @@ The lab uses scheduled Sentinel analytics rules to identify suspicious web activ
 
 Current detection scenarios include:
 
-- Web scanner detection
-- Sensitive file discovery
-- Potential sensitive file exposure
-- High request rate
+- **UC001** — Web Scanner Detection
+- **UC002** — Sensitive File Discovery
+- **UC003** — Potential Sensitive File Exposure
+- **UC004** — High Request Rate
 
 Detection queries: [detections/web/](detections/web/)
 
