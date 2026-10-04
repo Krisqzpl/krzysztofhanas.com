@@ -1,3 +1,9 @@
+<p align="center">
+  <a href="https://krzysztofhanas.com">
+    <img src="assets/banner.png" alt="Krzysztof Hanas | Cybersecurity | SOC Analyst" width="60%">
+  </a>
+</p>
+
 # SOC Lab Audit Log
 
 A concise chronological record of changes made to the lab. Each row represents one implemented, modified, replaced, or retired element.
@@ -30,3 +36,9 @@ A concise chronological record of changes made to the lab. Each row represents o
 | 24 | Connected portfolio website with SOC lab repository | Portfolio | Direct navigation to technical project content |
 
 > New changes are appended as additional rows. Existing rows remain unchanged unless an implemented component is explicitly modified, replaced, or retired.
+
+---
+
+<p align="center">
+  © 2026 Krzysztof Hanas · <a href="https://krzysztofhanas.com">krzysztofhanas.com</a>
+</p>
