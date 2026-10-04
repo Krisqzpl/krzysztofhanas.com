@@ -1,24 +1,65 @@
-# Krzysztof Hanas — Cybersecurity Portfolio
+# Microsoft Sentinel SOC Lab
 
-Cybersecurity portfolio focused on practical SOC operations, detection engineering, threat hunting, and security monitoring.
+Personal SOC lab built in Microsoft Azure for hands-on practice with Microsoft Sentinel, KQL, detection engineering, threat hunting, and incident investigation.
 
-## SOC Lab
+## Lab Overview
 
-Hands-on Microsoft Sentinel lab built around a public web sensor and real-world telemetry.
+The lab uses a public Ubuntu/nginx web server as a telemetry source. Real Internet traffic is collected and sent to Microsoft Sentinel, where it is parsed with KQL and analyzed using custom Analytics Rules.
 
-The project documents the full workflow from log collection and normalization through detection engineering and incident investigation.
+```text
+Internet
+   |
+   v
+Azure Ubuntu VM / nginx
+   |
+   v
+Azure Monitor Agent
+   |
+   v
+Log Analytics
+   |
+   v
+Microsoft Sentinel
+   |
+   +--> KQL / Hunting
+   +--> Analytics Rules
+   +--> Alerts / Incidents
+```
 
-**Key areas:** Microsoft Sentinel · KQL · Detection Engineering · Threat Hunting · Nginx Telemetry · Incident Investigation
+## Current Components
 
-[View the SOC Lab](./soc-lab/README.md)
+- Azure Ubuntu VM with nginx
+- Network Security Group with restricted SSH access
+- Azure Monitor Agent and Data Collection Rule
+- Log Analytics Workspace
+- Microsoft Sentinel
+- Custom `NginxAccess_CL` telemetry
+- KQL nginx parser
+- Custom web detections
+- Real Internet scanner telemetry
+- GitHub-based project documentation and deployment
 
-## What is inside
+## Detection Work
 
-- **Detections** — KQL analytics for suspicious web activity
-- **Parsers** — normalization of raw Nginx telemetry
-- **Cases** — documented investigations based on observed activity
-- **Architecture & setup** — technical documentation of the lab environment
+The lab is used to build and tune detections based on observed web traffic, including:
 
-## Website
+- Web scanning and enumeration
+- High request rates
+- Sensitive file discovery
+- Suspicious HTTP activity
 
-[krzysztofhanas.com](https://krzysztofhanas.com)
+Detection queries are stored under `detections/`.
+
+## Investigations
+
+Real activity observed by the sensor is used for investigation and documented as cases where useful.
+
+## Documentation
+
+- **Architecture** — short overview of the environment and telemetry flow
+- **Audit Log** — chronological record of what was built and changed
+- **Troubleshooting** — problems encountered and how they were resolved
+
+## Goal
+
+Build practical SOC experience by collecting real telemetry, writing detections, investigating alerts, and tuning rules based on observed activity.
