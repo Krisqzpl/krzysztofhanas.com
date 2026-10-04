@@ -1,3 +1,9 @@
+<p align="center">
+  <a href="https://krzysztofhanas.com">
+    <img src="../assets/banner.png" alt="Krzysztof Hanas | Cybersecurity | SOC Analyst" width="60%">
+  </a>
+</p>
+
 # Microsoft Sentinel SOC Home Lab
 
 A personal SOC lab for detection engineering, threat hunting, and incident investigation using Microsoft Sentinel and real Internet telemetry.
@@ -93,3 +99,9 @@ GitHub --> GitHub Actions --> Self-hosted Runner --> rsync --> nginx
 This lab is designed as a practical environment for developing and demonstrating:
 
 **Microsoft Sentinel · KQL · Detection Engineering · Threat Hunting · Alert Triage · Incident Investigation · Detection Tuning · Security Automation**
+
+---
+
+<p align="center">
+  © 2026 Krzysztof Hanas · <a href="https://krzysztofhanas.com">krzysztofhanas.com</a>
+</p>
