@@ -10,8 +10,8 @@ A lightweight backlog for planned improvements and ideas. Items move into the au
 
 | # | Idea / Planned Change | Area | Status | Notes |
 |---:|---|---|---|---|
-| 1 | Introduce structured Use Case IDs for Sentinel Analytics Rules | Detection Engineering | Future | UC001–UC099 Network/Web, UC101–UC199 Identity, UC201–UC299 Endpoint/Host, UC301–UC399 Email, UC401–UC499 Cloud/Azure, UC501–UC599 Cross-source/Correlation |
-| 2 | Rename existing web detection rules to the UC naming standard | Detection Engineering | Future | Start with the current Network/Web rules |
+| 1 | Introduce structured Use Case IDs for Sentinel Analytics Rules | Detection Engineering | Done | UC001–UC099 Network/Web, UC101–UC199 Identity, UC201–UC299 Endpoint/Host, UC301–UC399 Email, UC401–UC499 Cloud/Azure, UC501–UC599 Cross-source/Correlation |
+| 2 | Rename existing web detection rules to the UC naming standard | Detection Engineering | Done | Existing web detections assigned UC001–UC004 |
 | 3 | Create a known web scanners watchlist | Detection Tuning | Future | Suppress recurring scanner noise only in scan/noise-oriented detections |
 | 4 | Apply known-scanner exclusions selectively | Detection Tuning | Future | Do not suppress security-relevant successful access or higher-risk behavior |
 | 5 | Add Identity telemetry | Identity | Future | Use sign-in telemetry as the basis for UC101–UC199 detections |
