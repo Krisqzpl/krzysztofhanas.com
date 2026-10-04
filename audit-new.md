@@ -1,44 +1,32 @@
-# SOC Lab Build Audit Log
+# SOC Lab Audit Log
 
-A short chronological record of the main changes made while building the lab.
+A concise chronological record of changes made to the lab. Each row represents one implemented, modified, replaced, or retired element.
 
-## Environment
+| # | Change | Component | Notes |
+|---:|---|---|---|
+| 1 | Created dedicated Azure Resource Group | Azure | Resource container for the SOC lab |
+| 2 | Created Log Analytics Workspace | Azure / Log Analytics | Central workspace for lab telemetry |
+| 3 | Enabled Microsoft Sentinel | Microsoft Sentinel | SIEM capabilities enabled for the workspace |
+| 4 | Added Log Analytics ingestion cost controls | Log Analytics | Limited lab ingestion costs |
+| 5 | Deployed Ubuntu Server VM | Azure VM | Internet-facing web sensor |
+| 6 | Configured Network Security Group | Azure Networking | Web traffic allowed; SSH restricted |
+| 7 | Installed and configured Nginx | Nginx | Public web service and telemetry source |
+| 8 | Connected custom domain and enabled HTTPS | Web / DNS | Public access configured |
+| 9 | Extended Nginx logging with requested host | Nginx | Added host context to telemetry |
+| 10 | Installed and configured Azure Monitor Agent | Azure Monitor | Log collection agent |
+| 11 | Created Data Collection Rule for Nginx logs | Azure Monitor | Defined log collection pipeline |
+| 12 | Connected Nginx telemetry to Log Analytics | Log Analytics | Logs routed to the workspace |
+| 13 | Verified ingestion into `NginxAccess_CL` | Microsoft Sentinel | Custom log ingestion confirmed |
+| 14 | Created reusable KQL parser | KQL | Normalized Nginx telemetry for detections |
+| 15 | Added Web Scanner Detection rule | Sentinel Analytics | Initial scanner detection |
+| 16 | Added entity mapping and custom alert details | Sentinel Analytics | Improved investigation context |
+| 17 | Validated detection against unsolicited Internet traffic | Microsoft Sentinel | Confirmed rule behavior on real telemetry |
+| 18 | Added High Request Rate detection | Sentinel Analytics | Detects request bursts from a source IP |
+| 19 | Added Sensitive File Discovery detection | Sentinel Analytics | Detects probing for sensitive files/paths |
+| 20 | Tuned detection logic based on observed scanner activity | Sentinel Analytics | Reduced noise and improved detection quality |
+| 21 | Began separating known scanner noise from security-relevant behavior | Detection Tuning | Known-scanner handling planned for noisy scan-only rules |
+| 22 | Added SOC lab documentation and detection code to GitHub | GitHub | Portfolio and technical artifacts published |
+| 23 | Added GitHub Actions deployment | GitHub Actions | Automated deployment of project web content |
+| 24 | Connected portfolio website with SOC lab repository | Portfolio | Direct navigation to technical project content |
 
-1. Created a dedicated Azure Resource Group for the SOC lab.
-2. Created a Log Analytics Workspace and enabled Microsoft Sentinel.
-3. Added cost controls for Log Analytics ingestion.
-4. Deployed an Ubuntu Server VM as the Internet-facing web sensor.
-5. Configured the Network Security Group for TCP/80 and TCP/443 and restricted SSH access.
-6. Installed and configured nginx.
-7. Connected the domain and enabled HTTPS.
-8. Added the project website and SOC blog infrastructure.
-
-## Telemetry
-
-9. Extended nginx logging to include the requested host.
-10. Installed/configured Azure Monitor Agent.
-11. Created a Data Collection Rule for nginx access logs.
-12. Connected the log source to Log Analytics.
-13. Verified ingestion into `NginxAccess_CL`.
-14. Created a reusable KQL parser for nginx telemetry.
-
-## Detection Engineering
-
-15. Created the first Web Scanner Detection rule.
-16. Added Sentinel entity mapping and custom alert details.
-17. Validated detections against real unsolicited Internet traffic.
-18. Added additional detection logic for high request rates and sensitive-file discovery.
-19. Tuned detection logic based on observed scanner activity.
-20. Started separating known scanner noise from security-relevant behavior.
-
-## GitHub / Deployment
-
-21. Added the SOC lab documentation and detection code to GitHub.
-22. Added GitHub Actions-based deployment for project web content.
-23. Connected the public portfolio website with the SOC lab repository.
-
-## Current State
-
-The lab currently collects real nginx telemetry, parses it with KQL, runs custom Sentinel Analytics Rules, and produces alerts/incidents for investigation.
-
-Detailed technical problems and their resolutions will be maintained separately in `TROUBLESHOOTING.md`.
+> New changes are appended as additional rows. Existing rows remain unchanged unless an implemented component is explicitly modified, replaced, or retired.
