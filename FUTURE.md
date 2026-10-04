@@ -23,6 +23,17 @@ A lightweight backlog for planned improvements and ideas. Items move into the au
 | 11 | Expand threat-hunting scenarios | Threat Hunting | Future | Add reusable hunting queries and investigation examples |
 | 12 | Maintain a dedicated troubleshooting document | Documentation | Future | Record only real issues, root causes, and resolutions encountered during the build |
 
+## Use Case ID Ranges
+
+| Range | Area |
+|---|---|
+| UC001–UC099 | Network / Web |
+| UC101–UC199 | Identity |
+| UC201–UC299 | Endpoint / Host |
+| UC301–UC399 | Email |
+| UC401–UC499 | Cloud / Azure |
+| UC501–UC599 | Cross-source / Correlation |
+
 ## Status
 
 - **Future** — accepted idea for a later stage.
