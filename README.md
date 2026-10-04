@@ -1,3 +1,9 @@
+<p align="center">
+  <a href="https://krzysztofhanas.com">
+    <img src="assets/banner.png" alt="Krzysztof Hanas | Cybersecurity | SOC Analyst" width="60%">
+  </a>
+</p>
+
 # Microsoft Sentinel SOC Lab
 
 Personal SOC lab built in Microsoft Azure for hands-on practice with Microsoft Sentinel, KQL, detection engineering, threat hunting, and incident investigation.
@@ -63,3 +69,9 @@ Real activity observed by the sensor is used for investigation and documented as
 ## Goal
 
 Build practical SOC experience by collecting real telemetry, writing detections, investigating alerts, and tuning rules based on observed activity.
+
+---
+
+<p align="center">
+  © 2026 Krzysztof Hanas · <a href="https://krzysztofhanas.com">krzysztofhanas.com</a>
+</p>
