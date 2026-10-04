@@ -1,0 +1,64 @@
+// ============================================================================
+// DETECTION: UC001 - Web Scanner Detection - Nginx
+// ============================================================================
+// Project: Microsoft Sentinel SOC Home Lab
+// Use Case ID: UC001
+// Data source: NginxAccess_CL
+// Severity: Medium
+// Status: Active
+//
+// Purpose:
+// Detects potential automated web scanning by identifying source IP addresses
+// generating multiple HTTP 404 responses across multiple unique paths against
+// the same virtual host within a short time window.
+//
+// Detection logic:
+// - HTTP status code: 404
+// - More than 10 requests
+// - More than 5 unique paths
+// - Aggregation window: 1 minute
+// - Grouping: SourceIP + Host
+//
+// Sentinel schedule:
+// - Run query every: 5 minutes
+// - Lookup data from: last 5 minutes
+// - Trigger alert when: query returns > 0 results
+//
+// Entity mapping:
+// - IP.Address -> SourceIP
+//
+// Custom details:
+// - Host
+// - Requests
+// - UniquePaths
+// - Paths
+// - UserAgents
+//
+// Alert description fields:
+// - SourceIP
+// - Host
+// - Requests
+//
+// Notes:
+// Host is included in the aggregation so requests made by the same source IP
+// against different virtual hosts are not combined into a single detection.
+// ============================================================================
+
+NginxAccess_CL
+| extend SourceIP = tostring(split(RawData, " ")[0])
+| extend Request = tostring(split(RawData, '"')[1])
+| extend CodeByte = trim(" ", tostring(split(RawData, '"')[2]))
+| extend Code = toint(split(CodeByte, " ")[0])
+| extend Bytes = tolong(split(CodeByte, " ")[1])
+| extend Method = tostring(split(Request, " ")[0])
+| extend Path = tostring(split(Request, " ")[1])
+| extend UserAgent = tostring(split(RawData, '"')[5])
+| extend Host = extract('host="([^"]+)"', 1, RawData)
+| where Code == 404
+| summarize
+    Requests = count(),
+    UniquePaths = dcount(Path),
+    Paths = make_set(Path, 20),
+    UserAgents = make_set(UserAgent, 10)
+    by SourceIP, Host, bin(TimeGenerated, 1m)
+| where Requests > 10 and UniquePaths > 5
