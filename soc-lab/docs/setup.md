@@ -1,3 +1,9 @@
+<p align="center">
+  <a href="https://krzysztofhanas.com">
+    <img src="../../assets/banner.png" alt="Krzysztof Hanas | Cybersecurity | SOC Analyst" width="60%">
+  </a>
+</p>
+
 # SOC Lab Deployment Summary
 
 ## Overview
@@ -157,3 +163,9 @@ Sensitive material such as SSH private keys, tokens, Azure credentials, password
 Screenshots and documentation should also be reviewed before publication for identifiers or infrastructure details that are not intentionally public.
 
 For planned development, see [../FUTURE.md](../FUTURE.md).
+
+---
+
+<p align="center">
+  © 2026 Krzysztof Hanas · <a href="https://krzysztofhanas.com">krzysztofhanas.com</a>
+</p>
