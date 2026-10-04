@@ -11,7 +11,7 @@
 | Field | Value |
 |---|---|
 | Case ID | CASE-001 |
-| Detection | Web Scanner Detection - Nginx |
+| Detection | UC001 - Web Scanner Detection - Nginx |
 | Severity | Medium |
 | Source IP | 130.12.180.117 |
 | Target | blog.krzysztofhanas.com / krzysztofhanas.com |
@@ -107,13 +107,13 @@ Observed sensitive-file requests returned unsuccessful responses or redirects, a
 
 Investigation of this alert identified an additional detection opportunity.
 
-The original `Web Scanner Detection - Nginx` rule detected the activity based primarily on request volume, unique paths and HTTP 404 responses.
+The original `UC001 - Web Scanner Detection - Nginx` rule detected the activity based primarily on request volume, unique paths and HTTP 404 responses.
 
 However, the investigation showed that attempts to access resources such as `.env`, `.git`, `.aws` and `wp-config` are independently security-relevant.
 
 This resulted in development of a second Microsoft Sentinel analytics rule:
 
-**Sensitive File Discovery - Nginx**
+**UC002 - Sensitive File Discovery - Nginx**
 
 The new detection identifies a source attempting to access multiple unique sensitive paths within a short time window.
 
