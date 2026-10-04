@@ -16,7 +16,6 @@
 | Source IP | 130.12.180.117 |
 | Target | blog.krzysztofhanas.com / krzysztofhanas.com |
 | Activity | Automated web scanning / sensitive file discovery |
-| Status | Investigated |
 | Assessment | True Positive - Automated Internet Scanning |
 | Impact | No evidence of compromise |
 
