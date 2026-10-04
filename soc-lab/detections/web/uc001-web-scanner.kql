@@ -34,6 +34,9 @@
 // - Paths
 // - UserAgents
 //
+// Alert name:
+// UC001 - Web Scanner Detection - {{Host}} - {{SourceIP}}
+//
 // Alert description fields:
 // - SourceIP
 // - Host
