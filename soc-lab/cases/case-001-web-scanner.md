@@ -12,7 +12,7 @@
 |---|---|
 | Case ID | CASE-001 |
 | Detection | UC001 - Web Scanner Detection - Nginx |
-| Severity | Medium |
+| Severity | Low |
 | Source IP | 130.12.180.117 |
 | Target | blog.krzysztofhanas.com / krzysztofhanas.com |
 | Activity | Automated web scanning / sensitive file discovery |
