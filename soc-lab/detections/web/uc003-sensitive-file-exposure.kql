@@ -1,0 +1,72 @@
+// Detection: UC003 - Potential Sensitive File Exposure - Nginx
+//
+// Purpose:
+// Detect HTTP 2xx responses for requests targeting potentially sensitive
+// files or configuration resources.
+//
+// Detection logic:
+// A single successful HTTP response is sufficient to trigger the detection.
+// Unlike Sensitive File Discovery, this rule does not require enumeration
+// of multiple paths.
+//
+// Important:
+// HTTP 2xx does not by itself prove that sensitive information was exposed.
+// Applications or reverse proxies may return HTTP 200 for resources that
+// do not actually exist. Every alert should therefore be investigated.
+//
+// Schedule:
+// Run every: 5 minutes
+// Lookup data from: last 5 minutes
+//
+// Entity mapping:
+// IP -> Address -> SourceIP
+//
+// Custom details:
+// Host
+// Method
+// Path
+// StatusCode -> Code
+// Bytes
+// UserAgent
+//
+// Alert name:
+// UC003 - Potential Sensitive File Exposure - {{Host}} - {{SourceIP}}
+//
+// Alert description:
+// Sensitive path {{Path}} returned HTTP {{Code}} to {{SourceIP}}.
+//
+// Incident grouping:
+// Group alerts when all mapped entities match.
+// Grouping window: 5 hours.
+// Re-open closed incidents: Disabled.
+
+NginxAccess_CL
+| extend SourceIP = tostring(split(RawData, " ")[0])
+| extend Request = tostring(split(RawData, '"')[1])
+| extend CodeByte = trim(" ", tostring(split(RawData, '"')[2]))
+| extend Code = toint(split(CodeByte, " ")[0])
+| extend Bytes = tolong(split(CodeByte, " ")[1])
+| extend Method = tostring(split(Request, " ")[0])
+| extend Path = tostring(split(Request, " ")[1])
+| extend Referer = tostring(split(RawData, '"')[3])
+| extend UserAgent = tostring(split(RawData, '"')[5])
+| extend Host = extract('host="([^"]+)"', 1, RawData)
+| where Path has_any (
+    ".env",
+    ".git",
+    ".aws",
+    "wp-config",
+    "docker-compose",
+    "sftp-config",
+    ".svn"
+)
+| where Code between (200 .. 299)
+| project
+    TimeGenerated,
+    SourceIP,
+    Host,
+    Method,
+    Path,
+    Code,
+    Bytes,
+    UserAgent
