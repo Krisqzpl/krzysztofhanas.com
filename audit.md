@@ -10,6 +10,7 @@ A concise chronological record of changes made to the lab. Each row represents o
 
 | # | Change | Component | Notes |
 |---:|---|---|---|
+| 28 | Added known web scanners watchlist | Detection Tuning | Implemented `_GetWatchlist('WL_Known_Web_Scanners')` to reduce recurring Low-severity scanner alerts while preserving higher-risk detections |
 | 27 | Aligned web detection severities with Sentinel | Detection Tuning | UC001 and UC002 set to Low; UC003 remains Medium; UC004 set to Low |
 | 26 | Renamed existing web detections to UC001–UC004 | Detection Engineering | Standardized rule and file naming for current Network/Web use cases |
 | 25 | Introduced structured Sentinel Use Case IDs | Detection Engineering | UC001–UC099 Network/Web, UC101–UC199 Identity, UC201–UC299 Endpoint/Host, UC301–UC399 Email, UC401–UC499 Cloud/Azure, UC501–UC599 Cross-source/Correlation |
