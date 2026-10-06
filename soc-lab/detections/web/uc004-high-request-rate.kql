@@ -10,12 +10,12 @@
 // distributing requests between multiple websites.
 //
 // Threshold:
-// More than 50 HTTP requests within 1 minute from a single SourceIP.
+// More than 100 HTTP requests and more than 20 unique paths within 1 minute from a single SourceIP.
 //
 // Baseline:
-// The threshold was selected after reviewing real Internet traffic
-// observed by the lab. During analysis, one source generated 76 requests
-// within one minute across multiple monitored hosts.
+// The threshold was tuned after reviewing a 7-day baseline of real Internet traffic.
+// The previous >50 requests/minute condition sat near the observed P99 and generated
+// excessive scanner noise, so the rule now also requires >20 unique paths.
 //
 // Schedule:
 // Run every: 5 minutes
@@ -57,4 +57,4 @@ NginxAccess_CL
     Paths = make_set(Path, 20),
     UserAgents = make_set(UserAgent, 10)
     by SourceIP, bin(TimeGenerated, 1m)
-| where Requests > 50
+| where Requests > 100 and UniquePaths > 20
