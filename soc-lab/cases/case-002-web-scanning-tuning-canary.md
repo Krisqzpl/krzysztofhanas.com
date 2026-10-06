@@ -24,6 +24,9 @@ This exposed two things:
 
 Goal: reduce routine Internet-scanning noise without losing aggressive reconnaissance.
 
+<img width="701" height="488" alt="image" src="https://github.com/user-attachments/assets/1e0e63ff-3012-48ef-8486-35c62c6586cc" />
+
+
 ## Canary Layer
 
 Three additional detections were introduced:
