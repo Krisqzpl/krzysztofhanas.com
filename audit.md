@@ -11,7 +11,6 @@ A concise chronological record of changes made to the lab. Each row represents o
 | # | Change | Component | Notes |
 |---:|---|---|---|
 | 30 | Paused and tuned UC001–UC004 after noise review | Detection Tuning | After 24h of testing, UC001–UC004 were paused for tuning. 28 incidents were observed from UC001/UC002/UC004; new baseline-driven thresholds: UC001 >100 requests AND >75 unique paths / 1m, UC002 >=75 unique sensitive paths / 5m, UC003 unchanged, UC004 >100 requests AND >20 unique paths / 1m |
-| 30 | Paused and tuned UC001–UC004 after noise review | Detection Tuning | After 24h of testing, UC001–UC004 were paused for tuning. 28 incidents were observed from UC001/UC002/UC004; tuned thresholds: UC001 >100 requests AND >75 unique paths / 1m, UC002 >=75 unique sensitive paths / 5m, UC003 unchanged, UC004 >100 requests AND >20 unique paths / 1m |
 | 29 | Added IP reputation enrichment Logic App | Security Automation | Added incident-triggered enrichment using VirusTotal and AbuseIPDB, with results written back to Sentinel incident comments |
 | 28 | Added known web scanners watchlist | Detection Tuning | Implemented `_GetWatchlist('WL_Known_Web_Scanners')` to reduce recurring Low-severity scanner alerts while preserving higher-risk detections |
 | 27 | Aligned web detection severities with Sentinel | Detection Tuning | UC001 and UC002 set to Low; UC003 remains Medium; UC004 set to Low |
