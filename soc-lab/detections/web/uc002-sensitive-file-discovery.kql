@@ -5,7 +5,7 @@
 // Use Case ID: UC002
 // Data source: NginxAccess_CL
 // Severity: Low
-// Status: Active
+// Status: Paused for tuning validation
 //
 // Purpose:
 // Detects attempts to enumerate sensitive files and configuration resources
@@ -24,7 +24,7 @@
 // - Request path contains a known sensitive resource pattern
 // - Activity is aggregated per SourceIP and Host
 // - Aggregation window: 5 minutes
-// - At least 3 unique sensitive paths must be requested
+// - At least 75 unique sensitive paths must be requested
 //
 // Sentinel schedule:
 // - Run query every: 5 minutes
@@ -91,4 +91,4 @@ NginxAccess_CL
     StatusCodes = make_set(Code, 10),
     UserAgents = make_set(UserAgent, 10)
     by SourceIP, Host, bin(TimeGenerated, 5m)
-| where UniquePaths >= 3
+| where UniquePaths >= 75
