@@ -1,1 +1,4 @@
-canary-reference-placeholder
+Service: Admin Console
+Endpoint: blog.krzysztofhanas.com/.cache-r7f3/api/auth/session
+Username: svc_console
+Password: Console123!
