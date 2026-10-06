@@ -68,6 +68,19 @@ Current detection scenarios include:
 - **UC003** — Potential Sensitive File Exposure
 - **UC004** — High Request Rate
 
+### Current tuning state
+
+After the first 24-hour validation period, UC001–UC004 were temporarily paused while thresholds were tuned against observed Internet traffic. UC001, UC002 and UC004 generated 28 incidents during that period.
+
+| Rule | Tuned logic | Window |
+|---|---|---|
+| **UC001** | More than 100 requests AND more than 75 unique paths for HTTP 404 activity | 1 minute |
+| **UC002** | At least 75 unique sensitive paths | 5 minutes |
+| **UC003** | Unchanged: any sensitive-path response with HTTP 2xx | 5-minute scheduled lookup |
+| **UC004** | More than 100 requests AND more than 20 unique paths | 1 minute |
+
+The thresholds were selected from a 7-day traffic baseline to reduce automated scanner noise while preserving higher-value detections.
+
 Detection queries: [detections/web/](detections/web/)
 
 ## Real Internet Investigations
