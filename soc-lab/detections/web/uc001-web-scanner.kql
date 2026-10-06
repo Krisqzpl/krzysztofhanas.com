@@ -5,7 +5,7 @@
 // Use Case ID: UC001
 // Data source: NginxAccess_CL
 // Severity: Low
-// Status: Active
+// Status: Paused for tuning validation
 //
 // Purpose:
 // Detects potential automated web scanning by identifying source IP addresses
@@ -14,8 +14,8 @@
 //
 // Detection logic:
 // - HTTP status code: 404
-// - More than 10 requests
-// - More than 5 unique paths
+// - More than 100 requests
+// - More than 75 unique paths
 // - Aggregation window: 1 minute
 // - Grouping: SourceIP + Host
 //
@@ -64,4 +64,4 @@ NginxAccess_CL
     Paths = make_set(Path, 20),
     UserAgents = make_set(UserAgent, 10)
     by SourceIP, Host, bin(TimeGenerated, 1m)
-| where Requests > 10 and UniquePaths > 5
+| where Requests > 100 and UniquePaths > 75
