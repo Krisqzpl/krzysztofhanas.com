@@ -23,8 +23,8 @@ This exposed two things:
 | UC004 | Required both high request volume and path diversity |
 
 Goal: reduce routine Internet-scanning noise without losing aggressive reconnaissance.
+<img width="773" height="486" alt="image" src="https://github.com/user-attachments/assets/b7d2e176-3957-4c62-80d3-0d81861bcdcb" />
 
-<img width="701" height="488" alt="image" src="https://github.com/user-attachments/assets/1e0e63ff-3012-48ef-8486-35c62c6586cc" />
 
 
 ## Canary Layer
