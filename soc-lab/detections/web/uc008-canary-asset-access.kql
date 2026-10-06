@@ -1,0 +1,46 @@
+// Detection: UC008 - Canary Asset Access
+//
+// Purpose:
+// Detect access to an additional decoy web resource used as a secondary
+// reconnaissance indicator.
+//
+// Detection logic:
+// Any request to the dedicated canary asset path is recorded for investigation.
+// The real canary path is intentionally redacted from this public repository.
+//
+// Severity:
+// Medium
+//
+// Schedule:
+// Run every: 5 minutes
+// Lookup data from: last 5 minutes
+//
+// Entity mapping:
+// IP -> Address -> SourceIP
+// Host -> HostName -> Host
+//
+// Custom details:
+// SourceIP
+// Host
+// Method
+// Path
+// CanaryType
+//
+// Alert name:
+// UC008 - Canary Asset Access from {{SourceIP}}
+//
+// Incident grouping:
+// Group alerts when IP / SourceIP matches.
+// Grouping window: 1 hour.
+// Re-open closed incidents: Disabled.
+
+NginxAccess_CL
+| extend SourceIP = tostring(split(RawData, " ")[0])
+| extend Request = tostring(split(RawData, '"')[1])
+| extend Method = tostring(split(Request, " ")[0])
+| extend Path = tostring(split(Request, " ")[1])
+| extend Host = extract('host="([^"]+)"', 1, RawData)
+| extend CanaryType = "Hidden-asset"
+| where Host == "blog.krzysztofhanas.com"
+| where Path == "xxxxxxxxxxxxxxxxxxxxxxxxx"
+| project TimeGenerated, SourceIP, Host, Method, Path, CanaryType, RawData
