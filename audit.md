@@ -10,6 +10,8 @@ A concise chronological record of changes made to the lab. Each row represents o
 
 | # | Change | Component | Notes |
 |---:|---|---|---|
+| 32 | Added UC006–UC008 canary detection rules | Detection Engineering | Added GitHub-origin canary, blog-only canary and canary asset access detections with redacted public paths |
+| 31 | Added VirusTotal and AbuseIPDB enrichment | Security Automation | Added IP reputation enrichment to support Sentinel investigations and incident context |
 | 30 | Paused and tuned UC001–UC004 after noise review | Detection Tuning | After 24h of testing, UC001–UC004 were paused for tuning. 28 incidents were observed from UC001/UC002/UC004; new baseline-driven thresholds: UC001 >100 requests AND >75 unique paths / 1m, UC002 >=75 unique sensitive paths / 5m, UC003 unchanged, UC004 >100 requests AND >20 unique paths / 1m |
 | 29 | Added IP reputation enrichment Logic App | Security Automation | Added incident-triggered enrichment using VirusTotal and AbuseIPDB, with results written back to Sentinel incident comments |
 | 28 | Added known web scanners watchlist | Detection Tuning | Implemented `_GetWatchlist('WL_Known_Web_Scanners')` to reduce recurring Low-severity scanner alerts while preserving higher-risk detections |
