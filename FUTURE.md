@@ -20,6 +20,8 @@ A lightweight backlog for planned improvements and ideas. Items move into the au
 | 10 | Add Sentinel Workbook / dashboard | Visualization | Future | Summarize lab telemetry and detection activity |
 | 11 | Expand threat-hunting scenarios | Threat Hunting | Future | Add reusable hunting queries and investigation examples |
 | 12 | Maintain a dedicated troubleshooting document | Documentation | Future | Record only real issues, root causes, and resolutions encountered during the build |
+| 13 | Introduce temporary/test analytics rule convention | Detection Tuning | Future | Prefix test rules with [T] and use Informational severity so they can be monitored separately from production Low/Medium/High rules |
+| 14 | Integrate Sentinel with OpenAI API / ChatGPT | AI / Integration | Future | Build a read-only, least-privilege interface for conversational access to Sentinel incidents and investigation data, with data minimization, secret protection, prompt-injection safeguards, and usage limits |
 
 ## Use Case ID Ranges
 
