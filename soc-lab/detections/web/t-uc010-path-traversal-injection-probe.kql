@@ -1,0 +1,67 @@
+// Detection: T-UC010 - Path Traversal and Injection Probe
+//
+// Status:
+// Testing
+//
+// Purpose:
+// Detect repeated HTTP requests containing path traversal, injection,
+// command execution or other suspicious exploitation patterns.
+//
+// Severity:
+// Medium
+//
+// Schedule:
+// Run every: 5 minutes
+// Lookup data from: last 5 minutes
+//
+// Threshold:
+// 3 or more matched suspicious requests from the same source IP within 5 minutes.
+//
+// Entity mapping:
+// IP -> Address -> SourceIP
+//
+// Custom details:
+// SourceIP
+// Events
+// UniquePaths
+// Paths
+// Patterns
+// Hosts
+//
+// Alert name:
+// T-UC010 - Path Traversal and Injection Probe from {{SourceIP}}
+//
+// Incident grouping:
+// Group alerts when IP / SourceIP matches.
+// Grouping window: 1 hour.
+// Re-open closed incidents: Disabled.
+
+NginxAccess_CL
+| extend SuspiciousPatterns = dynamic([
+    "../", "..%2f", "%2e%2e", "%252e%252e",
+    "union select", "union%20select",
+    "' or 1=1", "or%201=1",
+    "<script", "%3cscript",
+    "/etc/passwd", "win.ini",
+    "cmd=", "exec=", "shell=",
+    ";wget", ";curl", "%3bwget", "%3bcurl"
+])
+| extend SourceIP = tostring(split(RawData, " ")[0])
+| extend Request = tostring(split(RawData, '"')[1])
+| extend Path = tostring(split(Request, " ")[1])
+| extend Host = extract('host="([^"]+)"', 1, RawData)
+| where isnotempty(Path)
+| mv-apply Pattern = SuspiciousPatterns to typeof(string) on (
+    where Path contains Pattern
+    | summarize MatchedPatterns = make_set(Pattern)
+)
+| where array_length(MatchedPatterns) > 0
+| summarize
+    Events = count(),
+    UniquePaths = dcount(Path),
+    Paths = make_set(Path, 10),
+    Patterns = make_set(MatchedPatterns, 10),
+    Hosts = make_set(Host, 10)
+    by SourceIP, bin(TimeGenerated, 5m)
+| where Events >= 3
+| order by Events desc
