@@ -1,0 +1,79 @@
+// Detection: T-UC012 - Scanner to Canary Correlation
+//
+// Status:
+// Testing
+//
+// Purpose:
+// Correlate high-volume reconnaissance from a source IP with subsequent
+// interaction with a canary resource.
+//
+// Severity:
+// High
+//
+// Schedule:
+// Run every: 5 minutes
+// Lookup data from: last 30 minutes
+//
+// Correlation condition:
+// At least 20 requests from a source IP within 30 minutes followed by
+// access to a canary resource from the same source IP.
+//
+// Entity mapping:
+// IP -> Address -> SourceIP
+//
+// Custom details:
+// SourceIP
+// ReconEvents
+// ReconPaths
+// CanaryPath
+// CanaryTime
+// Host
+// ReconWindow
+//
+// Alert name:
+// T-UC012 - Scanner to Canary Correlation from {{SourceIP}}
+//
+// Incident grouping:
+// Group alerts when IP / SourceIP matches.
+// Grouping window: 1 hour.
+// Re-open closed incidents: Disabled.
+//
+// Note:
+// Real canary paths are intentionally redacted from this public repository.
+
+NginxAccess_CL
+| extend SourceIP = tostring(split(RawData, " ")[0])
+| extend Request = tostring(split(RawData, '"')[1])
+| extend Path = tostring(split(Request, " ")[1])
+| summarize
+    ReconEvents = count(),
+    ReconPaths = make_set(Path, 20)
+    by SourceIP, ReconWindow = bin(TimeGenerated, 30m)
+| where ReconEvents >= 20
+| join kind=inner (
+    NginxAccess_CL
+    | extend SourceIP = tostring(split(RawData, " ")[0])
+    | extend Request = tostring(split(RawData, '"')[1])
+    | extend Path = tostring(split(Request, " ")[1])
+    | extend Host = extract('host="([^"]+)"', 1, RawData)
+    | where Path in (
+        "xxxxxxxxxxxxxxxxxxxxxxxxx",
+        "xxxxxxxxxxxxxxxxxxxxxxxxx",
+        "xxxxxxxxxxxxxxxxxxxxxxxxx"
+    )
+    | project
+        SourceIP,
+        CanaryTime = TimeGenerated,
+        Host,
+        CanaryPath = Path
+) on SourceIP
+| where CanaryTime between (ReconWindow .. ReconWindow + 30m)
+| project
+    SourceIP,
+    ReconWindow,
+    CanaryTime,
+    ReconEvents,
+    ReconPaths,
+    Host,
+    CanaryPath
+| order by CanaryTime desc
