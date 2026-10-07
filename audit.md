@@ -10,6 +10,7 @@ A concise chronological record of changes made to the lab. Each row represents o
 
 | # | Change | Component | Notes |
 |---:|---|---|---|
+| 33 | Added UC009, T-UC010, UC011 and T-UC012 web detections | Detection Engineering | Added malformed/non-HTTP protocol probe detection, path traversal and injection probe detection, offensive scanner User-Agent detection, and scanner-to-canary correlation logic |
 | 32 | Added UC006–UC008 canary detection rules | Detection Engineering | Added GitHub-origin canary, blog-only canary and canary asset access detections with redacted public paths |
 | 31 | Added VirusTotal and AbuseIPDB enrichment | Security Automation | Added IP reputation enrichment to support Sentinel investigations and incident context |
 | 30 | Paused and tuned UC001–UC004 after noise review | Detection Tuning | After 24h of testing, UC001–UC004 were paused for tuning. 28 incidents were observed from UC001/UC002/UC004; new baseline-driven thresholds: UC001 >100 requests AND >75 unique paths / 1m, UC002 >=75 unique sensitive paths / 5m, UC003 unchanged, UC004 >100 requests AND >20 unique paths / 1m |
