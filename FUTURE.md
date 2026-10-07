@@ -22,6 +22,7 @@ A lightweight backlog for planned improvements and ideas. Items move into the au
 | 12 | Maintain a dedicated troubleshooting document | Documentation | Future | Record only real issues, root causes, and resolutions encountered during the build |
 | 13 | Introduce temporary/test analytics rule convention | Detection Tuning | Future | Prefix test rules with [T] and use Informational severity so they can be monitored separately from production Low/Medium/High rules |
 | 14 | Integrate Sentinel with OpenAI API / ChatGPT | AI / Integration | Future | Build a read-only, least-privilege interface for conversational access to Sentinel incidents and investigation data, with data minimization, secret protection, prompt-injection safeguards, and usage limits |
+| 15 | Deploy an isolated Internet-exposed VM for attack telemetry collection | Deception / Threat Research | Future | Build a separate, isolated VM intended to attract opportunistic Internet attacks and collect telemetry for Sentinel analysis, while keeping it segmented from the main lab and any sensitive resources |
 
 ## Use Case ID Ranges
 
