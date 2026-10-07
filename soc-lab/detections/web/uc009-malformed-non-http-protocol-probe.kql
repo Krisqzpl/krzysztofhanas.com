@@ -1,0 +1,45 @@
+// Detection: UC009 - Malformed or Non-HTTP Protocol Probe
+//
+// Purpose:
+// Detect repeated malformed, unusual or non-HTTP requests reaching the monitored web service.
+//
+// Severity:
+// Low
+//
+// Schedule:
+// Run every: 5 minutes
+// Lookup data from: last 10 minutes
+//
+// Threshold:
+// 5 or more unusual requests from the same source IP within 10 minutes.
+//
+// Entity mapping:
+// IP -> Address -> SourceIP
+//
+// Custom details:
+// SourceIP
+// Events
+// Methods
+// Hosts
+//
+// Alert name:
+// UC009 - Malformed or Non-HTTP Protocol Probe from {{SourceIP}}
+//
+// Incident grouping:
+// Group alerts when IP / SourceIP matches.
+// Grouping window: 1 hour.
+// Re-open closed incidents: Disabled.
+
+NginxAccess_CL
+| extend SourceIP = tostring(split(RawData, " ")[0])
+| extend Request = tostring(split(RawData, '"')[1])
+| extend Method = tostring(split(Request, " ")[0])
+| extend Host = extract('host="([^"]+)"', 1, RawData)
+| where Method !in ("GET", "POST", "HEAD", "OPTIONS")
+| summarize
+    Events = count(),
+    Methods = make_set(Method, 20),
+    Hosts = make_set(Host, 10)
+    by SourceIP, bin(TimeGenerated, 10m)
+| where Events >= 5
+| order by Events desc
