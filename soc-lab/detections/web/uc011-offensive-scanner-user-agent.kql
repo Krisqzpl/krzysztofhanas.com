@@ -1,0 +1,45 @@
+// Detection: UC011 - Offensive Scanner User-Agent
+//
+// Purpose:
+// Detect HTTP requests containing User-Agent strings associated with known
+// offensive security or network scanning tools.
+//
+// Severity:
+// Low
+//
+// Schedule:
+// Run every: 5 minutes
+// Lookup data from: last 5 minutes
+//
+// Entity mapping:
+// IP -> Address -> SourceIP
+// Host -> HostName -> Host
+//
+// Custom details:
+// SourceIP
+// Host
+// Path
+// UserAgent
+//
+// Alert name:
+// UC011 - Offensive Scanner User-Agent from {{SourceIP}}
+//
+// Incident grouping:
+// Group alerts when IP / SourceIP matches.
+// Grouping window: 1 hour.
+// Re-open closed incidents: Disabled.
+
+NginxAccess_CL
+| extend SourceIP = tostring(split(RawData, " ")[0])
+| extend Request = tostring(split(RawData, '"')[1])
+| extend Path = tostring(split(Request, " ")[1])
+| extend Host = extract('host="([^"]+)"', 1, RawData)
+| extend UserAgent = tostring(split(RawData, '"')[5])
+| where UserAgent has_any (
+    "sqlmap",
+    "nikto",
+    "nmap",
+    "masscan"
+)
+| project TimeGenerated, SourceIP, Host, Path, UserAgent
+| order by TimeGenerated desc
