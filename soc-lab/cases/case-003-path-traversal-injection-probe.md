@@ -13,6 +13,10 @@ After several days of monitoring, recurring suspicious web requests were observe
 The activity appeared repeatedly from external sources and included multiple recognizable probing and exploitation patterns.
 
 <img width="519" height="583" alt="image" src="https://github.com/user-attachments/assets/44feba2e-e28e-49c3-8c3e-9eede6367ded" />
+<img width="638" height="399" alt="image" src="https://github.com/user-attachments/assets/1cb1b24c-71b3-40de-8028-b665f37962dc" />
+<img width="667" height="421" alt="image" src="https://github.com/user-attachments/assets/0ebab9c5-8ceb-462a-bb5c-006770e15d96" />
+
+
 
 
 ## Details
