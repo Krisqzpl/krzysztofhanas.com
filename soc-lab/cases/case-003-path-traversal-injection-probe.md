@@ -18,9 +18,6 @@ The activity appeared repeatedly from external sources and included multiple rec
   <img src="https://github.com/user-attachments/assets/0ebab9c5-8ceb-462a-bb5c-006770e15d96" width="31%" />
 </p>
 
-
-
-
 ## Details
 
 Examples of observed paths included:
@@ -44,6 +41,36 @@ Unusual application route probing pattern, likely related to automated framework
     /[[%2e%2e%2eoptional]]
 
 Similar route probing behavior, likely used to identify exposed or incorrectly handled application routes.
+
+## Apache Path Traversal / RCE Probe
+
+Another recurring pattern was observed from multiple external IP addresses:
+
+    /cgi-bin/%%32%65%%32%65/%%32%65%%32%65/%%32%65%%32%65/%%32%65%%32%65/%%32%65%%32%65/%%32%65%%32%65/%%32%65%%32%65/bin/sh
+
+The request uses heavily encoded traversal sequences in an attempt to escape the intended web directory and reach /bin/sh.
+
+This structure is consistent with automated probing for the Apache HTTP Server path traversal vulnerabilities **CVE-2021-41773** and **CVE-2021-42013**. These vulnerabilities affected Apache HTTP Server 2.4.49 and 2.4.50 respectively. Under vulnerable configurations, path traversal could allow access to files outside the configured document root and, when CGI execution was enabled, could potentially lead to remote command execution.
+
+The activity can therefore be interpreted as:
+
+    Recon / Exploit Probe
+            |
+            v
+    Encoded Path Traversal
+            |
+            v
+    Filesystem Escape Attempt
+            |
+            v
+    /bin/sh Target
+            |
+            v
+    Potential Remote Code Execution
+
+The same or highly similar payload being observed from multiple source IP addresses is consistent with commodity Internet scanning and automated exploitation attempts rather than normal web traffic.
+
+The presence of the request alone does not indicate compromise. No evidence of successful exploitation was identified in the reviewed telemetry.
 
 ## Assessment
 
