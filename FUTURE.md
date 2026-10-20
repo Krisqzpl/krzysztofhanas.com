@@ -10,6 +10,7 @@ A lightweight backlog for planned improvements and ideas. Items move into the au
 
 | # | Idea / Planned Change | Area | Status | Notes |
 |---:|---|---|---|---|
+| 2 | Research Sentinel SOAR abuse as an asynchronous multi-hop HTTP relay | SOAR / Threat Research | Future | In an isolated lab, model Nginx request logs -> Sentinel analytics and automation rules -> Logic Apps -> fixed test webhooks across Azure environments; forward only benign identifiers, then investigate RBAC, audit trails, run history, detection opportunities, latency, and cost. No live C2 or arbitrary command execution. |
 | 3 | Create a known web scanners watchlist | Detection Tuning | Future | Suppress recurring scanner noise only in scan/noise-oriented detections |
 | 4 | Apply known-scanner exclusions selectively | Detection Tuning | Future | Do not suppress security-relevant successful access or higher-risk behavior |
 | 5 | Add Identity telemetry | Identity | Future | Use sign-in telemetry as the basis for UC101–UC199 detections |
